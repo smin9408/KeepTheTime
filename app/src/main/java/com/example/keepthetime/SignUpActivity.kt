@@ -23,6 +23,33 @@ class SignUpActivity : BaseActivity() {
 
     override fun setupEvents() {
 
+        binding.btnEmailCheck.setOnClickListener {
+
+//            입력한 이메일값을 => GET - /user/check 기능 활용
+            val inputEmail = binding.edtEmail.text.toString()
+
+            apiList.getRequestDuplicatedCheck("EMAIL", inputEmail).enqueue( object : Callback<BasicResponse>{
+                override fun onResponse(
+                    call: Call<BasicResponse>,
+                    response: Response<BasicResponse>
+                ) {
+//                    응답이 성공인가? => 사용해도 되는가?
+                    if(response.isSuccessful){ //  code값이 200인가?
+                        Toast.makeText(mContext, "사용가능한 이메일 입니다.", Toast.LENGTH_SHORT).show()
+
+                    }else{
+                        Toast.makeText(mContext, "이미 사용중인 이메일 입니다.", Toast.LENGTH_SHORT).show()
+                    }
+
+                }
+
+                override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
+                }
+
+            })
+
+        }
+
         binding.btnSignUp.setOnClickListener {
 
             val inputEmail = binding.edtEmail.text.toString()
