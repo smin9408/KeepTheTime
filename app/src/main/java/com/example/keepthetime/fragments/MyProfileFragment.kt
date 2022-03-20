@@ -1,13 +1,17 @@
 package com.example.keepthetime.fragments
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.keepthetime.R
+import com.example.keepthetime.SplashActivity
 import com.example.keepthetime.databinding.FragmentMyProfileBinding
 import com.example.keepthetime.datas.BasicResponse
 import com.example.keepthetime.utils.ContextUtil
@@ -37,6 +41,32 @@ class MyProfileFragment : BaseFragment() {
     }
 
     override fun setupEvents() {
+
+        binding.btnLogout.setOnClickListener{
+
+            val alert = AlertDialog.Builder(mContext)
+                .setTitle("로그아웃")
+                .setMessage("정말 로그아웃 하시겠습니까?")
+                .setPositiveButton("확인", DialogInterface.OnClickListener { dialogInterface, i ->
+
+//                    실제 로그아웃 처리리 => 저장된 토큰을 초기화.
+                    ContextUtil.setLoginUserToken(mContext, "")
+
+//                    로딩 화면으로 복귀
+                    val myIntent = Intent(mContext, SplashActivity::class.java)
+
+//                    기존 메인화면은 종료 => 하지만 Fragment에는 finish()가 없다.
+                    myIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                    startActivity(myIntent)
+
+
+
+                })
+                .setNegativeButton("취소", null)
+                .show()
+        }
+
     }
 
     override fun setValues() {
