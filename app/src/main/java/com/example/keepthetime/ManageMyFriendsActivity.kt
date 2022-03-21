@@ -3,6 +3,7 @@ package com.example.keepthetime
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.example.keepthetime.adapters.MyFriendAdapter
 import com.example.keepthetime.databinding.ActivityManageMyFriendsBinding
 import com.example.keepthetime.datas.BasicResponse
 import com.example.keepthetime.datas.UserData
@@ -17,6 +18,8 @@ class ManageMyFriendsActivity : BaseActivity() {
 
     val mFriendList = ArrayList<UserData>()
 
+    lateinit var mAdapter: MyFriendAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_manage_my_friends)
@@ -29,6 +32,9 @@ class ManageMyFriendsActivity : BaseActivity() {
 
     override fun setValues() {
         getMyFriendListFromServer()
+
+        mAdapter = MyFriendAdapter(mContext, R.layout.my_friend_list_item, mFriendList)
+        binding.myFriendsListView.adapter = mAdapter
     }
 
     fun getMyFriendListFromServer() {
@@ -46,6 +52,9 @@ class ManageMyFriendsActivity : BaseActivity() {
 //                    목록의 내용물을 통째로 => mFriendList 변수의 내용물로 담자.
 
                     mFriendList.addAll( br.data.friends)
+
+//                    어댑터 새로 고침
+                    mAdapter.notifyDataSetChanged()
 
                 }
 
