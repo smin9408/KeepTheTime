@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "520489382658",
+    "project_id": "keepthetime-b177e",
+    "storage_bucket": "keepthetime-b177e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:520489382658:android:13f1d4e10ac1f29b6b881b",
+        "android_client_info": {
+          "package_name": "com.example.keepthetime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "520489382658-vvrptue7t48r18p04au3fttjiiigkbvs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQMbaF0cuwHjG3a9nhLMJnNxoZuhnMIoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "520489382658-vvrptue7t48r18p04au3fttjiiigkbvs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
