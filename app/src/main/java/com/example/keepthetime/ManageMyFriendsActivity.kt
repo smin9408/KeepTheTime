@@ -2,10 +2,10 @@ package com.example.keepthetime
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.service.autofill.UserData
 import androidx.databinding.DataBindingUtil
 import com.example.keepthetime.databinding.ActivityManageMyFriendsBinding
 import com.example.keepthetime.datas.BasicResponse
+import com.example.keepthetime.datas.UserData
 import com.example.keepthetime.utils.ContextUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -38,6 +38,18 @@ class ManageMyFriendsActivity : BaseActivity() {
             "my" // 수락 완료된 친구목록만 불러오기
         ).enqueue(object : Callback<BasicResponse> {
             override fun onResponse(call: Call<BasicResponse>, response: Response<BasicResponse>) {
+
+                if(response.isSuccessful){
+
+                    val br = response.body()!!
+//                    br.data.friends는 UserData 목록으로 이미 내려옴.
+//                    목록의 내용물을 통째로 => mFriendList 변수의 내용물로 담자.
+
+                    mFriendList.addAll( br.data.friends)
+
+                }
+
+
             }
 
             override fun onFailure(call: Call<BasicResponse>, t: Throwable) {
